@@ -4,8 +4,12 @@ import {BotaoDeletar} from './componentes/deletarTarefa.js'
 const CriaNovaTarefa = (evento) => {
     evento.preventDefault ()
 
-    const inputBruto = document.querySelector ('[data-form-input]')
+    const inputBruto = document.querySelector('[data-form-input]')
     const input = inputBruto.value
+
+    const calendario = document.querySelector('[data-form-date]')
+    const dataMoment = moment(calendario.value)
+    const dataFormatada = dataMoment.format('DD/MM/YYYY')
 
     const lista = document.querySelector ('[data-list]')
     const tarefa = document.createElement ('li')
@@ -13,7 +17,7 @@ const CriaNovaTarefa = (evento) => {
 
     lista.appendChild(tarefa)
 
-    const conteudo = `<p class="content">${input}</p>`
+    const conteudo = `<p class="content">${dataFormatada} * ${input}</p>`
     tarefa.innerHTML = conteudo
 
     tarefa.appendChild(BotaoConcluir())
