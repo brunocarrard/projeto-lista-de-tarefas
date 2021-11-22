@@ -14,6 +14,7 @@ const CriaNovaTarefa = (evento) => {
     tarefa.innerHTML = conteudo
 
     tarefa.appendChild(BotaoConcluir())
+    tarefa.appendChild(BotaoDeletar())
 
     inputBruto.value = ""
 }
@@ -38,5 +39,22 @@ const ConcluirTarefa = (evento) => {
     const concluirTarefa = botaoConcluir.parentElement
 
     concluirTarefa.classList.toggle('done')
+}
+
+const BotaoDeletar = () => {
+    const botaoDeletar = document.createElement ('button')
+    botaoDeletar.innerText = 'deletar'
+    botaoDeletar.addEventListener ('click', DeletarTarefa)
+
+    return botaoDeletar
+}
+
+const DeletarTarefa = (evento) => {
+    evento.preventDefault()
+
+    const botaoDeletar = evento.target
+    const deletarTarefa = botaoDeletar.parentElement
+
+    deletarTarefa.remove()
 }
 
