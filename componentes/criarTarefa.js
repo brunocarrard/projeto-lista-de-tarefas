@@ -1,5 +1,6 @@
 import {BotaoConcluir} from './concluirTarefa.js'
 import {BotaoDeletar} from './deletarTarefa.js'
+import { renderizarTarefa } from './renderizarTarefa.js'
 
 export const processarNovoItem = (evento) => {
     evento.preventDefault ()
@@ -9,8 +10,6 @@ export const processarNovoItem = (evento) => {
     const inputBruto = document.querySelector('[data-form-input]')
     const input = inputBruto.value
 
-    const lista = document.querySelector ('[data-list]')
-    
     const calendario = document.querySelector('[data-form-date]')
     const dataMoment = moment(calendario.value)
     const dataFormatada = dataMoment.format('DD/MM/YYYY')
@@ -20,13 +19,12 @@ export const processarNovoItem = (evento) => {
         dataFormatada
     }
 
-    const criaTarefa = Tarefa(dados)
-    lista.appendChild(criaTarefa)
-
     const tarefasAtualizadas = [... tarefas, dados]
     localStorage.setItem('tarefas', JSON.stringify(tarefasAtualizadas))
 
     inputBruto.value = ""
+
+    renderizarTarefa()
 }
 
 export const Tarefa = ({input, dataFormatada}) => {
