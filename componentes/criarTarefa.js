@@ -4,6 +4,8 @@ import {BotaoDeletar} from './deletarTarefa.js'
 export const processarNovoItem = (evento) => {
     evento.preventDefault ()
 
+    const tarefas = JSON.parse(localStorage.getItem('tarefas')) || []
+    
     const inputBruto = document.querySelector('[data-form-input]')
     const input = inputBruto.value
 
@@ -20,6 +22,9 @@ export const processarNovoItem = (evento) => {
 
     const criaTarefa = Tarefa(dados)
     lista.appendChild(criaTarefa)
+
+    const tarefasAtualizadas = [... tarefas, dados]
+    localStorage.setItem('tarefas', JSON.stringify(tarefasAtualizadas))
 
     inputBruto.value = ""
 }
