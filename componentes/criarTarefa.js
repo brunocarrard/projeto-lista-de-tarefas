@@ -1,7 +1,7 @@
-import {BotaoConcluir} from './componentes/concluirTarefa.js'
-import {BotaoDeletar} from './componentes/deletarTarefa.js'
+import {BotaoConcluir} from './concluirTarefa.js'
+import {BotaoDeletar} from './deletarTarefa.js'
 
-const processarNovoItem = (evento) => {
+export const processarNovoItem = (evento) => {
     evento.preventDefault ()
 
     const inputBruto = document.querySelector('[data-form-input]')
@@ -18,13 +18,13 @@ const processarNovoItem = (evento) => {
         dataFormatada
     }
 
-    const criaTarefa = CriaNovaTarefa(dados)
+    const criaTarefa = Tarefa(dados)
     lista.appendChild(criaTarefa)
 
     inputBruto.value = ""
 }
 
-const CriaNovaTarefa = ({input, dataFormatada}) => {
+export const Tarefa = ({input, dataFormatada}) => {
     const tarefa = document.createElement ('li')
     tarefa.classList.add ('task')
 
@@ -36,7 +36,3 @@ const CriaNovaTarefa = ({input, dataFormatada}) => {
 
     return tarefa
 }
-
-const novaTarefa = document.querySelector ('[data-form-button]')
-
-novaTarefa.addEventListener ('click', processarNovoItem)
